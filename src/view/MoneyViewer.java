@@ -3,7 +3,6 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -20,9 +19,11 @@ public class MoneyViewer extends JFrame{
         setSize(500, 500);
         setLocation(250, 200);
         setMinimumSize(new Dimension(300, 250));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         createComponents();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
         setVisible(true);
+        showWelcomeMessage();
     }
 
     private void createComponents() {
@@ -33,8 +34,7 @@ public class MoneyViewer extends JFrame{
     private JPanel addNorthPane() {
         JPanel panel = new JPanel();
         panel.add(addTextField(), BorderLayout.WEST);
-        panel.add(addLabelPanel(), BorderLayout.CENTER);
-        panel.add(addBoxPanel(), BorderLayout.EAST);
+        panel.add(addRightPanel(), BorderLayout.EAST);
         return panel;
     }
 
@@ -50,35 +50,27 @@ public class MoneyViewer extends JFrame{
         return text;
     }
 
-    private JPanel addLabelPanel() {
+    private JPanel addFromPanel() {
         JPanel panel = new JPanel();
-        panel.add(createLabel("DE: "), BorderLayout.NORTH);
-        panel.add(createLabel("A: "), BorderLayout.SOUTH);
+        panel.add(createLabel("DE: "));
+        panel.add(addComboBox());
         panel.add(addLastPanel());
         return panel;
     }
 
     private JButton createOperationButton() {
         JButton button = new JButton("Convertir");
-        button.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new JDialog();
-                JOptionPane.showMessageDialog(dialog,"You pressed: Convertir Button");
-            }
+        button.addActionListener((ActionEvent e) -> {
+            JDialog dialog = new JDialog();
+            JOptionPane.showMessageDialog(dialog,"You pressed: Convertir Button");
         });
         return button;
     }
 
     private JButton createCancelButton() {
         JButton button = new JButton("Cerrar");
-        button.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
+        button.addActionListener((ActionEvent e) -> {
+            System.exit(0);
         });
         return button;
     }
@@ -94,17 +86,30 @@ public class MoneyViewer extends JFrame{
         return label;
     }
 
-    private JPanel addBoxPanel() {
+    private JPanel addToPanel() {
         JPanel panel = new JPanel();
+        panel.add(createLabel("A: "), BorderLayout.SOUTH);
         panel.add(addComboBox(), BorderLayout.NORTH);
-        panel.add(addComboBox(), BorderLayout.SOUTH);
         return panel;
     }
 
     private JComboBox addComboBox() {
-        String[] currencies = new String[]{"EUR", "USD"};
+        String[] currencies = new String[]{"EUR", "USD", "CSD"};
         JComboBox box = new JComboBox(currencies);
         return box;
+    }
+
+    private void showWelcomeMessage() {
+        JDialog dialog = new JDialog();
+        JOptionPane.showMessageDialog(dialog, "Bienvenido a la calculadora de divisas");
+        dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+    }
+
+    private JPanel addRightPanel() {
+        JPanel panel = new JPanel();
+        panel.add(addFromPanel(), BorderLayout.NORTH);
+        panel.add(addToPanel(), BorderLayout.SOUTH);
+        return panel;
     }
     
 }
