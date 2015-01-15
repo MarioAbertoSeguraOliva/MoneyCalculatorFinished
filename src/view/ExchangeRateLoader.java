@@ -1,7 +1,8 @@
 package view;
 
 public class ExchangeRateLoader {
-    public void load(){
+
+    public static void load(CurrencySet currencySet) {
         
     }
 }

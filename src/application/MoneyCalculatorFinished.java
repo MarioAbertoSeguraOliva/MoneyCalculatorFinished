@@ -1,13 +1,16 @@
 package application;
 
+import controller.ExchangeCommand;
+import view.CurrencySet;
 import view.CurrencySetLoader;
 import view.MoneyViewer;
 
 public class MoneyCalculatorFinished {
 
     public static void main(String[] args) {
-        CurrencySetLoader loader = new CurrencySetLoader();
-        loader.load();
+        CurrencySet currencySet = CurrencySetLoader.load();
+        ExchangeCommand exchangeCommand = new ExchangeCommand(currencySet);
+        exchangeCommand.execute();
         new MoneyViewer();
     }
     

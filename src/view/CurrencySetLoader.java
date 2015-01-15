@@ -1,9 +1,8 @@
 package view;
 
-
 public class CurrencySetLoader {
 
-    public void load(){
-        
+    public static CurrencySet load(){
+        return new CurrencySet();
     }
 }
