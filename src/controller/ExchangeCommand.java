@@ -1,7 +1,7 @@
 package controller;
 
+import view.ApplicationFrame;
 import view.CurrencySet;
-import view.ExchangeRateLoader;
 
 public class ExchangeCommand {
     private final CurrencySet currencySet;
@@ -11,7 +11,7 @@ public class ExchangeCommand {
     }
 
     public void execute() {
-        ExchangeRateLoader.load(currencySet);
+        new ApplicationFrame();
     }
     
 }

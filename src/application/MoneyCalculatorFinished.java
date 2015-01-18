@@ -3,7 +3,6 @@ package application;
 import controller.ExchangeCommand;
 import view.CurrencySet;
 import view.CurrencySetLoader;
-import view.MoneyViewer;
 
 public class MoneyCalculatorFinished {
 
@@ -11,7 +10,6 @@ public class MoneyCalculatorFinished {
         CurrencySet currencySet = CurrencySetLoader.load();
         ExchangeCommand exchangeCommand = new ExchangeCommand(currencySet);
         exchangeCommand.execute();
-        new MoneyViewer();
     }
     
 }

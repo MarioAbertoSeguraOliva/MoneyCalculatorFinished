@@ -10,15 +10,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-public class MoneyViewer extends JFrame{
-
-    public MoneyViewer() {
+public class ApplicationFrame extends JFrame{
+    private ExchangeDialog exchangeDialog;
+    
+    public ApplicationFrame() {
         setTitle("Money Calculator V 1.02.03");
         setSize(500, 500);
         setLocation(250, 200);
         setMinimumSize(new Dimension(300, 250));
+        exchangeDialog = new ExchangeDialog();
         createComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -33,7 +34,7 @@ public class MoneyViewer extends JFrame{
 
     private JPanel addNorthPane() {
         JPanel panel = new JPanel();
-        panel.add(addTextField(), BorderLayout.WEST);
+        panel.add(exchangeDialog.getPanel(), BorderLayout.WEST);
         panel.add(addRightPanel(), BorderLayout.EAST);
         return panel;
     }
@@ -43,11 +44,6 @@ public class MoneyViewer extends JFrame{
         panel.add(createOperationButton());
         panel.add(createCancelButton());
         return panel;
-    }
-
-    private JTextField addTextField() {
-        JTextField text = new JTextField(10);
-        return text;
     }
 
     private JPanel addFromPanel() {
@@ -62,7 +58,7 @@ public class MoneyViewer extends JFrame{
         JButton button = new JButton("Convertir");
         button.addActionListener((ActionEvent e) -> {
             JDialog dialog = new JDialog();
-            JOptionPane.showMessageDialog(dialog,"You pressed: Convertir Button");
+            JOptionPane.showMessageDialog(dialog, exchangeDialog.readFromTextField());
         });
         return button;
     }
@@ -77,7 +73,6 @@ public class MoneyViewer extends JFrame{
 
     private JPanel addLastPanel() {
         JPanel panel = new JPanel();
-        
         return panel;
     }
 
