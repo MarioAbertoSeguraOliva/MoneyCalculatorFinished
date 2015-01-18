@@ -48,14 +48,14 @@ public class ApplicationFrame extends JFrame{
 
     private JPanel addFromPanel() {
         JPanel panel = new JPanel();
-        panel.add(createLabel("DE: "));
+        panel.add(createLabel("FROM: "));
         panel.add(addComboBox());
         panel.add(addLastPanel());
         return panel;
     }
 
     private JButton createOperationButton() {
-        JButton button = new JButton("Convertir");
+        JButton button = new JButton("Convert");
         button.addActionListener((ActionEvent e) -> {
             JDialog dialog = new JDialog();
             JOptionPane.showMessageDialog(dialog, exchangeDialog.readFromTextField());
@@ -64,7 +64,7 @@ public class ApplicationFrame extends JFrame{
     }
 
     private JButton createCancelButton() {
-        JButton button = new JButton("Cerrar");
+        JButton button = new JButton("Close");
         button.addActionListener((ActionEvent e) -> {
             System.exit(0);
         });
@@ -83,7 +83,7 @@ public class ApplicationFrame extends JFrame{
 
     private JPanel addToPanel() {
         JPanel panel = new JPanel();
-        panel.add(createLabel("A: "), BorderLayout.SOUTH);
+        panel.add(createLabel("TO: "), BorderLayout.SOUTH);
         panel.add(addComboBox(), BorderLayout.NORTH);
         return panel;
     }
@@ -96,7 +96,7 @@ public class ApplicationFrame extends JFrame{
 
     private void showWelcomeMessage() {
         JDialog dialog = new JDialog();
-        JOptionPane.showMessageDialog(dialog, "Bienvenido a la calculadora de divisas");
+        JOptionPane.showMessageDialog(dialog, "Welcome to MoneyCalculator, What do you want to convert?");
         dialog.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
     }
 
