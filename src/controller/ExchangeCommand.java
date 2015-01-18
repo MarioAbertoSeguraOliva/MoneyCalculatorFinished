@@ -11,7 +11,7 @@ public class ExchangeCommand {
     }
 
     public void execute() {
-        new ApplicationFrame();
+        new ApplicationFrame(currencySet);
     }
     
 }

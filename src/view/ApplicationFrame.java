@@ -3,6 +3,9 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -12,14 +15,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ApplicationFrame extends JFrame{
-    private ExchangeDialog exchangeDialog;
+    private final ExchangeDialog exchangeDialog;
+    private final CurrencySet currencySet;
     
-    public ApplicationFrame() {
+    public ApplicationFrame(CurrencySet currencySet) {
         setTitle("Money Calculator V 1.02.03");
         setSize(500, 500);
         setLocation(250, 200);
         setMinimumSize(new Dimension(300, 250));
         exchangeDialog = new ExchangeDialog();
+        this.currencySet = currencySet;
         createComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -89,8 +94,8 @@ public class ApplicationFrame extends JFrame{
     }
 
     private JComboBox addComboBox() {
-        String[] currencies = new String[]{"EUR", "USD", "CSD"};
-        JComboBox box = new JComboBox(currencies);
+        String[] currenciesToComboBox = fillComboBox(initializeComboBox(currencySet));
+        JComboBox box = new JComboBox(currenciesToComboBox);
         return box;
     }
 
@@ -105,6 +110,21 @@ public class ApplicationFrame extends JFrame{
         panel.add(addFromPanel(), BorderLayout.NORTH);
         panel.add(addToPanel(), BorderLayout.SOUTH);
         return panel;
+    }
+
+    private ArrayList<String> initializeComboBox(CurrencySet currencySet) {
+        ArrayList<String> currenciesCode =  new ArrayList<> (currencySet.getCurrencySet().keySet());
+        return currenciesCode;
+    }
+
+    private String[] fillComboBox(ArrayList<String> currencies) {
+        String[] currenciesToComboBox = new String[currencies.size()];
+        int counter = 0;
+        for (String currency : currencies) {
+            currenciesToComboBox[counter] = currency;
+            counter++;
+        }
+        return currenciesToComboBox;
     }
     
 }
